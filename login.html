@@ -14,11 +14,11 @@
         .custom-login {
             position: relative;
             top: 3rem;
+            width: 90%;
+            margin: 0 auto;
         }
         
-        .custom-login>div {
-            flex-direction: column !important;
-        }
+        .custom-login>div {}
         
         .custom-login-shadow {
             box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
@@ -30,19 +30,123 @@
             padding: 0.8rem;
             border-radius: 100%;
         }
+        
+        .custom-user-form-logo i {
+            color: #7613f1;
+            font-size: 9rem;
+        }
+        
+        .custom-form-fileds-collection {}
+        
+        .custom-2d-field,
+        .custom-3d-field {
+            /* display: grid;
+            grid-template-columns: 3rem 111%;
+            align-items: center; */
+            border-radius: 1rem;
+        }
+        
+        .custom-3d-field {}
+        
+        .custom-2d-field i,
+        .custom-3d-field i {}
+        
+        .custom-2d-field input,
+        .custom-3d-field input {
+            color: black;
+            font-size: 1.6rem;
+            padding: 0.2rem;
+            border-width: 0px;
+            border-top-right-radius: inherit;
+            border-bottom-right-radius: inherit;
+            border: 2px solid #cec0c0;
+        }
+        
+        .custom-3d-field input {
+            border-radius: 0rem;
+        }
+        
+        .custom-field-logo-left,
+        .custom-field-logo-right {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            background-color: #7613f1;
+            color: white;
+            border-width: 0px;
+            border-top-left-radius: inherit;
+            border-bottom-left-radius: inherit;
+        }
+        
+        .custom-field-logo-right {
+            border-radius: 0rem;
+            border-top-right-radius: inherit;
+            border-bottom-right-radius: inherit;
+        }
+        
+        .form-submit-btn,
+        .custom-user-form-logo {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+        
+        .form-submit-btn button {
+            background-color: #7613f1;
+        }
+        
+        .form-submit-btn i {}
+        
+        .custom-spinner {
+            color: #7613f1;
+        }
     </style>
     <title>connectzona -login</title>
 </head>
 
 <body>
     <!--login form start-->
-    <div class="row justify-content-center custom-login">
-        <div class="col-8 col-xl-5 p-3 custom-login-shadow">
-            <div class="logo">
+    <div class="row justify-content-center custom-login justify-content-center">
+        <div class="col-12 col-xl-5 custom-login-shadow row py-4 justify-content-center">
+            <div class="logo col-12">
                 <h1 class="text-center"><i class="fab fa-superpowers"></i> ConnectZona</h1>
             </div>
-            <div class="custom-form-name mt-2">
+            <div class="custom-form-name mt-2 col-12">
                 <h4 class="text-center fs-2">Login</h4>
+            </div>
+            <div class="custom-user-form-logo mt-3 col-12">
+                <i class="fas fa-user-circle"></i>
+            </div>
+            <div class="col-12 mt-2">
+                <h4 class="text-danger">Inncorect password</h4>
+                <h4 class="text-dark">We will send you a OTP code in your phone no and email</h4>
+            </div>
+            <div class="custom-form-fileds-collection row col-12 justify-content-center">
+                <div class="custom-2d-field mt-3 col-12 row justify-content-center">
+                    <div class="custom-field-logo-left col-2">
+                        <i class="fas fa-phone fs-4"></i>
+                    </div>
+                    <input type="text" name="" id="" class="col-10" placeholder="Phone Number" />
+                </div>
+                <div class="custom-3d-field mt-3 col-12 row justify-content-center">
+                    <div class="custom-field-logo-left col-2">
+                        <i class="fas fa-lock fs-4"></i>
+                    </div>
+                    <input type="text" name="" class="col-8" id="">
+                    <div class="custom-field-logo-right col-2">
+                        <i class="fas fa-eye fs-4"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center col-12 mt-2">
+                <div class="custom-spinner spinner-border  fs-4" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+            <div class="form-submit-btn mt-3">
+                <button class="btn btn-primary fs-3"><i class="fas fa-sign-in-alt"></i></button>
             </div>
         </div>
     </div>
