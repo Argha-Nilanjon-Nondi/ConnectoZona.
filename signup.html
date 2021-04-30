@@ -10,8 +10,8 @@
     <link href="/css/bootstrap/bootstrap.min.css" rel="stylesheet">
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/css/login.html">
-    <title>ConnectZona- Login</title>
+    <link rel="stylesheet" href="/css/login.css">
+    <title>ConnectZona- Signup</title>
 </head>
 
 <body>
@@ -22,13 +22,13 @@
                 <h1 class="text-center"><i class="fab fa-superpowers"></i> ConnectZona</h1>
             </div>
             <div class="custom-form-name mt-2 col-12">
-                <h4 class="text-center fs-2">Login</h4>
+                <h4 class="text-center fs-2">Signup</h4>
             </div>
             <div class="custom-user-form-logo mt-3 col-12">
                 <i class="fas fa-user-circle"></i>
             </div>
             <div class="col-12 mt-2" id="message-box">
-                <h4 class="text-dark">We will send you a OTP code in your phone no and email</h4>
+                <h4 class="text-dark">Enter a valid email and password . Password should be greater than chracter and should not contain white space</h4>
             </div>
             <div class="custom-form-fileds-collection row col-12 justify-content-center" id="field-box-one">
                 <div class="custom-2d-field mt-3 col-12 row justify-content-center">
@@ -52,7 +52,7 @@
                     <div class="custom-field-logo-left col-2">
                         <i class="fas fa-phone fs-4"></i>
                     </div>
-                    <input type="number" name="" id="number-bar" class="col-10" placeholder="OTP code" />
+                    <input type="text" name="" id="otp-bar" class="col-10" placeholder="OTP code" />
                 </div>
             </div>
             <div class="d-flex justify-content-center col-12 mt-2" id="loading-box" style="display:none !important;">
@@ -68,7 +68,7 @@
     </div>
     <!--login form end-->
 
-    <script src="/test.js"></script>
+    <!-- <script src="/test.js"></script> -->
     <script src="/js/bootstrap/bootstrap.bundle.min.js"></script>
     <script type="text/javascript">
         let password_bar = document.getElementById("password-bar");
@@ -126,17 +126,20 @@
         //when use click press forward button then
         let forward_btn = document.querySelector(".form-submit-btn>button");
         let email_bar = document.getElementById("email-bar");
+        let otp_bar = document.getElementById("otp-bar");
         let msg_box = document.getElementById("message-box");
         let loading_box = document.getElementById("loading-box");
         let field_box_one = document.getElementById("field-box-one");
         let field_box_two = document.getElementById("field-box-two");
         let email_value = "",
-            password_value = "";
+            password_value = "",
+            otp_code = "";
         forward_btn.addEventListener("click", function() {
             if ((required(email_bar.value) == true) && (validateEmail(email_bar.value) == true)) {
-                email_value += cleanData(email_bar.value);
+                email_value = cleanData(email_bar.value);
+                otp_code = otp_bar.value
                 if ((required(password_bar.value) == true) && (validatePassword(password_bar.value) == true)) {
-                    password_value += cleanData(password_bar.value);
+                    password_value = cleanData(password_bar.value);
                     msg_box.innerHTML = ``;
                 } else {
                     msg_box.innerHTML = `
@@ -147,13 +150,11 @@
                 <h4 class="text-danger">Email field should be filled and valid</h4>`;
             }
 
-            if ((email_value.length > 0) && (password_value.length > 0)) {
+            if ((email_value.length > 0) && (password_value.length > 0) && (otp_code == "")) {
                 loading_box.setAttribute("style", "display:flex !important;");
-
-
-
                 let formData = new FormData();
-                formData.append('email', 'John');
+                formData.append('email', email_value);
+                formData.append("password", password_value);
 
                 fetch('http://127.0.0.1:5000/createacount/step1/', {
                         method: "POST",
@@ -161,11 +162,41 @@
                     })
                     .then(response => response.json())
                     .then(function(json) {
+                        if (json["errorCode"] == "6000") {
+                            field_box_one.setAttribute("style", "display:none !important;");
+                            field_box_two.setAttribute("style", "display:flex !important;");
+                            loading_box.setAttribute("style", "display:none !important;");
+                            msg_box.innerHTML = `<h4 class="text-dark">We have sent you a OTP code . Please enter it and be a memeber .</h4>`;
+                        } else {
+                            msg_box.innerHTML = `<h4 class="text-danger">${json["errorText"]}</h4>`;
+                            loading_box.setAttribute("style", "display:none !important;");
+                        }
+                    });
+            }
 
-                        field_box_one.setAttribute("style", "display:none !important;");
-                        field_box_two.setAttribute("style", "display:flex !important;");
-                        loading_box.setAttribute("style", "display:none !important;");
-                        console.log(json)
+
+            if ((email_value.length > 0) && (password_value.length > 0) && (otp_code != "")) {
+                loading_box.setAttribute("style", "display:flex !important;");
+                let formData = new FormData();
+                alert(email_value)
+                formData.append('email', email_value);
+                formData.append("password", password_value);
+                formData.append("otp_code", otp_code);
+                fetch('http://127.0.0.1:5000/createacount/step2/', {
+                        method: "POST",
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(function(json) {
+                        if (json["errorCode"] == "6001") {
+                            msg_box.innerHTML = `<h4 class="text-success">Accont created sucessfully</h4>`;
+                            field_box_one.setAttribute("style", "display:none !important;");
+                            field_box_two.setAttribute("style", "display:none !important;");
+                            loading_box.setAttribute("style", "display:none !important;");
+                        } else {
+                            msg_box.innerHTML = `<h4 class="text-danger">${json["errorText"]}</h4>`;
+                            loading_box.setAttribute("style", "display:none !important;");
+                        }
                     });
             }
         });
