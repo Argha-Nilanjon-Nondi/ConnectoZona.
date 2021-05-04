@@ -1,0 +1,14 @@
+{
+  "secret": "7867866757865478655687556986677777",
+  "mail-server": "smtp.gmail.com",
+  "mail-user": "arghunandi@gmail.com",
+  "mail-password": "avunix9143",
+  "mail-port":465,
+  "mail-use-ssl":true,
+  "mail-use-tsl":false,
+  "db-host": "127.0.0.1",
+  "db-username": "argha_nilanjon",
+  "db-password": "avunix9143",
+  "db-name": "connnectozona",
+  "otp-valid-duration": "10"
+}

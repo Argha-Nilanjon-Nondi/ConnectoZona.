@@ -1,4 +1,5 @@
 import pymysql
+import json
 class Database:
 
     def run_sql(self):
@@ -7,11 +8,12 @@ class Database:
         try:
             cursor.execute(self.sql)
             db.commit()
-            result=cursor.fetchall()
+            result=json.loads(json.dumps(cursor.fetchall()))
             return result
         except Exception as error:
             db.rollback()
-            return error
+            print(error)
+            return ()
         db.close()
 
 # obj=Database()
