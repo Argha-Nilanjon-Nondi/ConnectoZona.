@@ -1,8 +1,8 @@
 {
   "secret": "7867866757865478655687556986677777",
   "mail-server": "smtp.gmail.com",
-  "mail-user": "arghunandi@gmail.com",
-  "mail-password": "avunix9143",
+  "mail-user": "<your-email>",
+  "mail-password": "<your-email-password>",
   "mail-port":465,
   "mail-use-ssl":true,
   "mail-use-tsl":false,
