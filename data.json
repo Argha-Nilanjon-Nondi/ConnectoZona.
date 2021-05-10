@@ -1,14 +1,14 @@
 {
-  "secret": "7867866757865478655687556986677777",
-  "mail-server": "smtp.gmail.com",
-  "mail-user": "<your-email>",
-  "mail-password": "<your-email-password>",
+  "secret": "<app-secret>",
+  "mail-server": "<smtp-server>",
+  "mail-user": "<email>",
+  "mail-password": "<email-password>",
   "mail-port":465,
   "mail-use-ssl":true,
   "mail-use-tsl":false,
-  "db-host": "127.0.0.1",
-  "db-username": "argha_nilanjon",
-  "db-password": "avunix9143",
+  "db-host": "<mysql-ip>",
+  "db-username": "<phpmyadmin-username>",
+  "db-password": "<phpmyadmin-pasword>",
   "db-name": "connnectozona",
   "otp-valid-duration": "10"
 }

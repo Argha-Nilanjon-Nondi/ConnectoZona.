@@ -157,8 +157,12 @@ def login_step2():
         return {"errorText":"method is not post","errorCode":"5008"},
 
 
-@app.route("/friend/<api_key>/",methods=["GET","POST","PUT","PATCH"])
-def friend(api_key):
+@app.route("/friend/",methods=["GET","POST","PUT","PATCH"])
+def friend():
+    try:
+        api_key = request.form["api_key"]
+    except:
+        return {"errorText": "Enter all required parameters", "errorCode": "5013"}
     obj=Validation()
     if(obj.ApiKeyExist(api_key)==False):
         return {"errorText":"API key is invalid","errorCode":"5012"}
